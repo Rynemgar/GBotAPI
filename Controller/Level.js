@@ -1,33 +1,28 @@
-require('dotenv');
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
-var sql = require("mssql");
-var conn = require("../connection/connect")();
+const querySql = require('../connection/connect');
+
 
 var routes = function ()
 {
     router.route('/')
         .get(function (req, res)
-        {
-          conn.connect().then(function()
-          {
-              var sqlQuery= "SELECT * FROM Levels";
-              var req = new sql.Request(conn);
-              req.query(sqlQuery).then(function (recordset)
-              {
-                  res.json(recordset.recordset);
-                  conn.close();
+        {  
+              querySql(`
+        SELECT UserId,
+            username,
+              Wins,
+              Losses 
+      FROM Levels
+      ORDER BY Wins DESC
+      LIMIT 10`)
+              .then((results) => {
+                  res.json(results);
               })
-                .catch(function (err) {
-                    conn.close();
-                    res.status(400).send("Error while inserting data");
-                });
             })
-            .catch(function (err) {
-                conn.close();
-                res.status(400).send("Error while inserting data");
-            });
-        });
+            
+        
     return router;  
 };
 module.exports = routes;
