@@ -1,7 +1,7 @@
 require('dotenv').config();
 var express = require('express');
 var app = express();
-var port = process.env.port || 1337;
+var port = process.env.PORT || 1337;
 const cors = require('cors');
 
 var levelsController = require('./Controller/Level')();
