@@ -1,3 +1,4 @@
+require('dotenv');
 var sql = require("mssql");
 var connect = function()
 {

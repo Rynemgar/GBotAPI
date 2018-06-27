@@ -1,7 +1,9 @@
+require('dotenv');
 var express = require('express');
 var router = express.Router();
 var sql = require("mssql");
 var conn = require("../connection/connect")();
+
 var routes = function ()
 {
     router.route('/')
