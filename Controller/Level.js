@@ -11,6 +11,7 @@ var routes = function ()
         {  
               querySql(`
         SELECT UserId,
+                Level,
             username,
               Wins,
               Losses 
