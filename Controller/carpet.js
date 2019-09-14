@@ -10,13 +10,12 @@ var routes = function ()
         .get(function (req, res)
         {  
               querySql(`
-        SELECT UserId,
-                Level,
-            username,
-              Wins,
-              Losses 
-      FROM Levels
-      ORDER BY Wins DESC`)
+        SELECT Range,
+               Colour,
+               Size,
+               Cost 
+        FROM Carpet
+        ORDER BY Cost DESC`)
               .then((results) => {
                   res.json(results);
               })
